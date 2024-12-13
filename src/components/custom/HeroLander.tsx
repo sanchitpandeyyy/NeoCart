@@ -1,7 +1,7 @@
 import Image from "next/image";
 import CounterPage from "./counter/CounterPage";
 
-export default function Banner() {
+export default function HeroLander() {
   return (
     <div className="  mb-6 gap-4 flex flex-col lg:flex-row">
       <div className="rounded-2xl p-4 flex justify-center">

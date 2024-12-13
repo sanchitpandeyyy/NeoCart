@@ -8,13 +8,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 const Login = async () => {
   const { getUser } = getKindeServerSession();
   const { id } = await getUser();
   const user = await getUserById(id);
   if (!user) {
-    return <div>User not found</div>;
+    redirect("/login");
   }
   return (
     <div className="container mx-auto p-4">
@@ -50,7 +51,7 @@ const Login = async () => {
               <Button>Add</Button>
             </Link>
             <Button>Edit</Button>
-            <Button variant="secondary">
+            <Button variant="outline">
               <LogoutLink>logout</LogoutLink>
             </Button>
           </div>

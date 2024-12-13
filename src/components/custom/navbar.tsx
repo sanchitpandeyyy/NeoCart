@@ -36,13 +36,14 @@ export async function Navbar() {
               <LoginLink>Sign in</LoginLink>
             </Button>
           )}
-          <Button size="icon" variant="ghost" className="relative">
-            <ShoppingCart className="h-5 w-5" />
-            <span className="absolute -top-2 -right-2 h-4 w-4 text-[10px] font-bold rounded-full bg-red-500 text-white flex items-center justify-center">
-
+          <Link href="/products/cart">
+            <Button size="icon" variant="ghost" className="relative">
+              <ShoppingCart className="h-5 w-5" />
+              {/* <span className="absolute -top-2 -right-2 h-4 w-4 text-[10px] font-bold rounded-full bg-red-500 text-white flex items-center justify-center">
               2
-            </span>
-          </Button>
+              </span> */}
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

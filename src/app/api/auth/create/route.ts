@@ -29,7 +29,7 @@ export const GET = async () => {
       });
     }
 
-    return NextResponse.redirect("/profile", 307);
+    return NextResponse.redirect(process.env.NEXT_PUBLIC_URL + "/profile", 307);
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json(
