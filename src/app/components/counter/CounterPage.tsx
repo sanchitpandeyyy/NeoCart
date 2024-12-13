@@ -1,5 +1,5 @@
 import CountdownTimer from "./CountdownTime";
-import ProductCard from "../ProductCard";
+import ProductCard from "../OfferCard";
 
 export default function CounterPage() {
   return (
