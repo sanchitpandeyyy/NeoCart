@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+
 import Image from "next/image";
 
 const data = [
@@ -76,7 +77,7 @@ const Card = () => {
           <p className="text-gray-600 line-through">{val.price}</p>
           <p className="text-green-600 font-bold">{val.priceAfter}</p>
           <div className="flex items-center mt-2">{renderStars(val.stars)}</div>
-          <button className="bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600 w-full">
+          <button className="bg-secondary hover:opacity-85 text-white py-2 px-4 rounded mt-4 w-full">
             {val.button}
           </button>
         </div>
