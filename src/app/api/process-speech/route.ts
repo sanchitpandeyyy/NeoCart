@@ -1,32 +1,42 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function POST(request: Request) {
-      const { nepaliSpeech } = await request.json();
+  try {
+    const { nepaliSpeech } = await request.json();
 
-    if (!process.env.GOOGLE_GEMINI_API_KEY) {
+    // Validate input
+    if (!nepaliSpeech) {
       return NextResponse.json(
-        {
-          error: "API key is missing",
-        },
+        { error: "Nepali speech input is required" },
         { status: 400 }
       );
     }
+    console.log("Received Nepali speech:", nepaliSpeech);
 
+    // Check API key
+    if (!process.env.GOOGLE_GEMINI_API_KEY) {
+      return NextResponse.json(
+        { error: "API key is missing" },
+        { status: 500 }
+      );
+    }
+
+    // Initialize Gemini AI
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-002" });
 
+    // Prompt for JSON extraction
     const prompt = `
       Convert the following Nepali speech to a structured JSON with these requirements:
       1. Extract a concise product title in English
-      2. Create a detailed English description of around 100 words in best relavent way, min 60 word.
-      3. List useful tags for the product like, name of the product or its use (overaly tags related to the product) minum 5 tags max 10 tags
+      2. Create a detailed English description of around 100 words (min 60 words)
+      3. List useful tags related to the product (min 5, max 10 tags)
       4. Identify the exact price in numerical format
-
+      
       Input Nepali Speech: "${nepaliSpeech}"
-
-      Alwyas Respond ONLY with a valid JSON object matching this structure:
+      
+      Always Respond ONLY with a valid JSON object matching this structure:
       {
         "title": "Product Name",
         "description": "Detailed product description in English",
@@ -35,35 +45,53 @@ export async function POST(request: Request) {
       }
     `;
 
-    let res = "";
-    let err = false;
+    // Maximum retries to prevent infinite loop
+    const MAX_RETRIES = 3;
+    let retries = 0;
 
-    do {
-      const result = await model.generateContent(prompt);
-      const jsonResponse = result.response.text().trim();
-  
-      console.log("Speech processing result:", jsonResponse);
-  
-      // Remove markdown formatting and parse
-  
-      let cleanJSON = "";
+    while (retries < MAX_RETRIES) {
       try {
-        cleanJSON = jsonResponse
-          .replace(/```json?/g, "")
+        // Generate content
+        const result = await model.generateContent(prompt);
+        const jsonResponse = result.response.text().trim();
+
+        // Remove markdown and extra formatting
+        const cleanJSON = jsonResponse
+          .replace(/```(json)?/gi, "")
           .replace(/```/g, "")
           .trim();
-      } catch (_) {
-        cleanJSON = jsonResponse
-          .replace(/```JSON?/g, "")
-          .replace(/```/g, "")
-          .trim();
+
+        // Parse and validate JSON
+        const parsedResponse = JSON.parse(cleanJSON);
+
+        // Validate parsed response structure
+        if (
+          !parsedResponse.title ||
+          !parsedResponse.description ||
+          !parsedResponse.tags ||
+          !parsedResponse.price
+        ) {
+          throw new Error("Invalid JSON structure");
+        }
+
+        // Return successful response
+        return NextResponse.json(parsedResponse, { status: 200 });
+      } catch (error) {
+        console.error(`Retry ${retries + 1} failed:`, error);
+        retries++;
       }
-  
-      res = JSON.parse(cleanJSON);
-    } catch (error) {
-      err = true;
     }
-      
-    } while (err);
-    
+
+    // If all retries fail
+    return NextResponse.json(
+      { error: "Failed to process speech input" },
+      { status: 500 }
+    );
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
 }

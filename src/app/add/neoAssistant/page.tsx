@@ -69,7 +69,6 @@ export default function NepaliSpeechToProductConverter() {
   };
 
   const uploadImage = async () => {
-    console.log("try to upload img");
     if (!selectedFile) return;
 
     const formData = new FormData();
@@ -80,7 +79,6 @@ export default function NepaliSpeechToProductConverter() {
     );
 
     try {
-      console.log("try to upload img st");
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
         {
@@ -90,7 +88,6 @@ export default function NepaliSpeechToProductConverter() {
       );
       const data = await response.json();
       setImageUrl(data.secure_url);
-      console.log("try to upload img done");
     } catch (error) {
       console.error("Error uploading image:", error);
     }
