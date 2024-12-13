@@ -46,8 +46,8 @@ const data = [
 ];
 
 const Card = () => {
-  const renderStars = (stars: any[]) => {
-    return stars.map((filled: any, index: React.Key | null | undefined) => (
+  const renderStars = (stars: boolean[]) => {
+    return stars.map((filled: boolean, index: React.Key | null | undefined) => (
       <span
         key={index}
         className={filled ? "text-yellow-500 cursor-pointer" : "text-gray-300"}

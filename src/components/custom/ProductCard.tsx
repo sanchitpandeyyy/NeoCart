@@ -8,8 +8,8 @@ import {
 import Image from "next/image";
 import { Skeleton } from "../ui/skeleton";
 import { Badge } from "../ui/badge";
-import Link from "next/link";
 import { Button } from "../ui/button";
+import { addProduct } from "@/app/actions/product";
 interface ProductData {
   title: string;
   price: number;
@@ -47,14 +47,21 @@ export const ProductCard = ({ data }: { data: ProductData }) => {
         <p className="mb-4">{data.description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {data.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">
+            <Badge key={tag} className="bg-gray-200 text-black">
               {tag}
             </Badge>
           ))}
         </div>
-        <Link href="/addProduct">
-          <Button>Upload</Button>
-        </Link>
+
+        <form action={addProduct}>
+          <input type="hidden" value={data.title} name="name" />
+          <input type="hidden" value={data.description} name="desc" />
+          <input type="hidden" value={data.price} name="price" />
+          <input type="hidden" value={data.tags} name="category" />
+          <input type="hidden" value={data.imageUrl} name="images" />
+
+          <Button type="submit">Upload</Button>
+        </form>
       </CardContent>
     </Card>
   );

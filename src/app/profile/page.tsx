@@ -7,12 +7,12 @@ import { getUserById } from "../actions/user";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const Login = async () => {
   const { getUser } = getKindeServerSession();
   const { id } = await getUser();
   const user = await getUserById(id);
-  console.log(user);
   if (!user) {
     return <div>User not found</div>;
   }
@@ -21,7 +21,13 @@ const Login = async () => {
       <Card className="max-w-md mx-auto">
         <CardHeader>
           <div className="flex items-center space-x-4">
-            <img className="w-20 h-20 rounded-full" src="/images/apple.jpg" />
+            <Image
+              alt="User"
+              height={500}
+              width={500}
+              className="w-20 h-20 rounded-full"
+              src="/images/apple.jpg"
+            />
             <div>
               <CardTitle className="text-2xl">{user.name}</CardTitle>
               <p className="text-sm text-muted-foreground">{user.email}</p>

@@ -5,6 +5,7 @@ import Breadcrumb from "../../components/Breadcrumb";
 import Image from "next/image";
 import { useCart } from "../cart/CartContext";
 import { Button } from "@/components/ui/button";
+
 import {
   Drawer,
   DrawerTrigger,
@@ -16,6 +17,7 @@ import {
   DrawerDescription,
 } from "@/components/ui/drawer";
 import Counter from "../../components/ProductCounter";
+
 
 const products = [
   {
