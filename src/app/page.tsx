@@ -1,14 +1,10 @@
-import Card from "@/components/Card";
 import React from "react";
-import { Navbar } from "./components/navbar";
-import Banner from "./components/banner";
+import Home from "./Home/Home";
 
 const App = () => {
   return (
-    <div className="bg-[#F6F6F6]">
-      <Navbar />
-      <Banner />
-    <Card/>
+    <div className="">
+      <Home />
     </div>
   );
 };
