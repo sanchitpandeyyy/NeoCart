@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
+
 import SubHeader from "./components/subheader";
 import { Navbar } from "./components/navbar";
+import Footer from "./components/Footer";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -27,6 +29,7 @@ export default function RootLayout({
         <Navbar />
         <SubHeader />
         {children}
+        <Footer />
       </body>
     </html>
   );
