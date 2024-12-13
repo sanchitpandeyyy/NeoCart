@@ -6,6 +6,7 @@ import { getUserById } from "../actions/user";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Login = async () => {
   const { getUser } = getKindeServerSession();
@@ -39,9 +40,11 @@ const Login = async () => {
             </p>
           </div>
           <div className="flex gap-3">
+            <Link href="/add/dashboard">
+              <Button>Add</Button>
+            </Link>
             <Button>Edit</Button>
             <Button variant="secondary">
-              {" "}
               <LogoutLink>logout</LogoutLink>
             </Button>
           </div>

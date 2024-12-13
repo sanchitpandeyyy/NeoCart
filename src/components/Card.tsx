@@ -1,5 +1,5 @@
-'use client'
-import React, { useState } from "react";
+"use client";
+import React from "react";
 import Image from "next/image";
 
 const data = [
@@ -44,7 +44,10 @@ const data = [
 const Card = () => {
   const renderStars = (stars: any[]) => {
     return stars.map((filled: any, index: React.Key | null | undefined) => (
-      <span key={index} className={filled ? "text-yellow-500 cursor-pointer" : "text-gray-300"}>
+      <span
+        key={index}
+        className={filled ? "text-yellow-500 cursor-pointer" : "text-gray-300"}
+      >
         ★
       </span>
     ));
