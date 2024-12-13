@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 
-import SubHeader from "./components/subheader";
-import { Navbar } from "./components/navbar";
-import Footer from "./components/Footer";
+import SubHeader from "../components/custom/subheader";
+import { Navbar } from "../components/custom/navbar";
+import Footer from "../components/custom/Footer";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({

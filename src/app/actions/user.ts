@@ -5,7 +5,6 @@ export async function getUserById(userId: string) {
     const user = await prisma.user.findUnique({
       where: { id: userId },
     });
-    console.log("User fetched:", user);
     return user;
   } catch (error) {
     console.error("Error fetching user:", error);
