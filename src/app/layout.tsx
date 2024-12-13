@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
+import { CartProvider } from "./products/cart/CartContext";
 
 import SubHeader from "../components/custom/subheader";
 import { Navbar } from "../components/custom/navbar";
@@ -24,13 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={poppins.variable}>
-      <body>
-        <Navbar />
-        <SubHeader />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <CartProvider>
+      <html lang="en" className={poppins.variable}>
+        <body>
+          <Navbar />
+          <SubHeader />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </CartProvider>
   );
 }
