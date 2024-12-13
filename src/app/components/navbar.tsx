@@ -2,8 +2,16 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ShoppingCart, User } from "lucide-react";
+import {
+  getKindeServerSession,
+  LoginLink,
+} from "@kinde-oss/kinde-auth-nextjs/server";
 
-export function Navbar() {
+export async function Navbar() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  console.log(user);
+
   return (
     <header className="border-b bg-white ">
       <div className="container flex h-16 items-center justify-between px-4">
@@ -17,12 +25,21 @@ export function Navbar() {
           <div className="hidden md:flex relative w-96">
             <Input placeholder="Search products..." className="w-full" />
           </div>
-          <Button size="icon" variant="ghost">
-            <User className="h-5 w-5" />
-          </Button>
-          <Button size="icon" variant="ghost">
+          {user?.id ? (
+            <Link href="/profile">
+              <Button size="icon">
+                <User className="h-5 w-5" />
+              </Button>
+            </Link>
+          ) : (
+            <Button className="hidden md:flex">
+              <LoginLink>Sign in</LoginLink>
+            </Button>
+          )}
+          <Button size="icon" variant="ghost" className="relative">
             <ShoppingCart className="h-5 w-5" />
-            <span className="absolute top-2 right-16 lg:right-[8.7rem] h-4 w-4 text-[10px] font-bold rounded-full bg-red-500 text-white flex items-center justify-center">
+            <span className="absolute -top-2 -right-2 h-4 w-4 text-[10px] font-bold rounded-full bg-red-500 text-white flex items-center justify-center">
+
               2
             </span>
           </Button>
