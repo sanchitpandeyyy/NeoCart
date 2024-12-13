@@ -4,9 +4,9 @@ import ProductCard from "../ProductCard";
 export default function CounterPage() {
   return (
     <div className="container mx-auto space-y-6 w-full scale-90">
-      <div className="border-2 border-blue-400 rounded-3xl p-4  flex justify-between items-center bg-white h-fit">
+      <div className="border-2 border-secondary rounded-3xl p-4 px-16  flex justify-between items-center bg-[#F6F6F6] h-fit">
         <div className="space-y-4">
-          <div>
+          <div className="">
             <h2 className="text-xl font-semibold">
               <span className="text-red-600">दशैं</span> तिहार अफर
             </h2>
@@ -14,6 +14,7 @@ export default function CounterPage() {
           </div>
           <CountdownTimer />
         </div>
+
         <div className=" h-40 relative">
           <img
             src="/images/wine.png"
@@ -27,14 +28,14 @@ export default function CounterPage() {
         <ProductCard
           title="Palpali Dhaka topi"
           subtitle="Symbol of Nepali Braveness"
-          image="images/neocart.png"
-          bgColor="bg-blue-600"
+          image="images/topi.png"
+          bgColor="bg-secondary"
         />
         <ProductCard
           title="White Prakash tea"
           subtitle="Feel the taste of Nepal"
-          image="/placeholder.svg?height=200&width=200"
-          bgColor="bg-red-500"
+          image="/images/tea.png"
+          bgColor="bg-primary"
         />
       </div>
     </div>

@@ -11,7 +11,7 @@ export default function Banner() {
           alt="Banner"
           width={400}
           height={400}
-          className="w-full lg:h-[400px] lg:w-[700px]  pl-4  object-cover"
+          className="w-full lg:h-[400px] lg:w-[700px] ml-5  object-cover rounded-xl"
         />
       </div>
       <div className=" w-[700px] h-[300px] lg:h-[200px]">
