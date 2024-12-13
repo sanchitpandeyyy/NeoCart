@@ -23,7 +23,9 @@ export const GET = async () => {
       dbUser = await prisma.user.create({
         data: {
           id: user.id,
-          name: ((user.family_name as string) + user.given_name) as string,
+          name: ((user.given_name as string) +
+            " " +
+            user.family_name) as string,
           email: user.email as string,
         },
       });

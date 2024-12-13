@@ -12,7 +12,8 @@ import { redirect } from "next/navigation";
 
 const Login = async () => {
   const { getUser } = getKindeServerSession();
-  const { id } = await getUser();
+  const login_user = await getUser();
+  const id = login_user?.id;
   const user = await getUserById(id);
   if (!user) {
     redirect("/login");
