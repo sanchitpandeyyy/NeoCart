@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Counter from "../components/ProductCounter";
 import {
   Drawer,
   DrawerTrigger,
@@ -13,6 +12,7 @@ import {
   DrawerClose,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import Counter from "./ProductCounter";
 
 const data = [
   {
