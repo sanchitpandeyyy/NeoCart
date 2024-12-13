@@ -1,3 +1,4 @@
+import Card from "@/components/Card";
 import React from "react";
 import { Navbar } from "./components/navbar";
 import Banner from "./components/banner";
@@ -7,6 +8,7 @@ const App = () => {
     <div className="bg-[#F6F6F6]">
       <Navbar />
       <Banner />
+    <Card/>
     </div>
   );
 };
