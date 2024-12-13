@@ -1,13 +1,12 @@
 import React from "react";
 import Banner from "../components/banner";
-import Card from "@/components/Card";
-import Counter from "../components/ProductCounter";
+import Card from "@/app/products/Card";
 
 const Home = () => {
   return (
-    <div>
+    <div className="mt-2">
       <Banner />
-      <p>Hot Deals</p>
+      <p className="pl-4 text-2xl font-semibold">Hot Deals</p>
       <Card />
     </div>
   );
