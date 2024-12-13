@@ -4,6 +4,7 @@ import "./globals.css";
 
 import SubHeader from "./components/subheader";
 import { Navbar } from "./components/navbar";
+import Footer from "./components/Footer";
 
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
         <Navbar />
         <SubHeader />
         {children}
+      <Footer/>
 
       </body>
     </html>
