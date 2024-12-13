@@ -2,25 +2,27 @@
 
 import prisma from "@/lib/prisma";
 
-export const addProduct = async (data) => {
+interface ProductData {
+  name: string;
+  desc: string;
+  images: string[];
+  price: number;
+  category: string[];
+  hotDeals: boolean;
+}
+
+export const addProduct = async (data: ProductData): Promise<void> => {
   console.log("Adding product");
 
   const res = await prisma.product.create({
     data: {
-      name: "name",
-      desc: "desc",
-      images: ["dfdf"],
-      price: 12233,
-      category: ["data.category "],
-      hotDeals: false,
+      name: data.name,
+      desc: data.desc,
+      images: data.images,
+      price: data.price,
+      category: data.category,
+      hotDeals: data.hotDeals,
     },
   });
   console.log("Product added", res);
-
-  //   name: 'Todd Kirkland',
-  //   desc: 'Et est quibusdam qu',
-  //   images: 'https://www.vyjocol.com',
-  //   price: '785',
-  //   category: 'Toys',
-  //   hotDeals: false
 };

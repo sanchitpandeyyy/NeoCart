@@ -2,20 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Mic, Loader2, ImageIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
-import Link from "next/link";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
+import { ProductCard } from "@/components/custom/ProductCard";
 
 interface ProductData {
   title: string;
@@ -43,48 +36,6 @@ function ProductSkeleton() {
           <Skeleton className="h-6 w-24" />
         </div>
         <Skeleton className="h-6 w-24" />
-      </CardContent>
-    </Card>
-  );
-}
-
-function ProductCard({ data }: { data: ProductData }) {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{data.title}</CardTitle>
-        <CardDescription>Price: Rs. {data.price}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        {data.imageUrl ? (
-          <div className="mb-4">
-            <Image
-              src={data.imageUrl}
-              alt={data.title}
-              width={300}
-              height={200}
-              className="rounded-lg object-contain h-64 w-full"
-            />
-          </div>
-        ) : (
-          <div className="relative">
-            <Skeleton className="h-64 w-full mb-4" />
-            <div className="absolute top-[50%] right-[50%] translate-x-[50%]">
-              Uploding Image...
-            </div>
-          </div>
-        )}
-        <p className="mb-4">{data.description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {data.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-        <Link href="/addProduct">
-          <Button>Upload</Button>
-        </Link>
       </CardContent>
     </Card>
   );
