@@ -66,7 +66,7 @@ export default function AddProductForm() {
   };
 
   return (
-    <Card className="w-full shadow-lg">
+    <Card className="w-full container">
       <CardHeader className="space-y-1">
         <CardTitle className="text-3xl font-bold text-center">
           Add New Product

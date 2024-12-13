@@ -13,7 +13,6 @@ const Login = async () => {
   const { getUser } = getKindeServerSession();
   const { id } = await getUser();
   const user = await getUserById(id);
-  console.log(user);
   if (!user) {
     return <div>User not found</div>;
   }
