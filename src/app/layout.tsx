@@ -5,8 +5,8 @@ import { CartProvider } from "./products/cart/CartContext";
 
 import SubHeader from "../components/custom/subheader";
 import { Navbar } from "../components/custom/navbar";
-import Footer from "../components/custom/Footer";
 import { Poppins } from "next/font/google";
+import Footer from "@/components/custom/footer";
 
 const poppins = Poppins({
   subsets: ["latin"],

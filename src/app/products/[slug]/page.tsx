@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import Breadcrumb from "../../components/Breadcrumb";
 import Image from "next/image";
 import { useCart } from "../cart/CartContext";
 import { Button } from "@/components/ui/button";
@@ -16,8 +15,8 @@ import {
   DrawerClose,
   DrawerDescription,
 } from "@/components/ui/drawer";
-import Counter from "../../components/ProductCounter";
-
+import Breadcrumb from "@/components/custom/Breadcrumb";
+import Counter from "@/components/custom/ProductCounter";
 
 const products = [
   {

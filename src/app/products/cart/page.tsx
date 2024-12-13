@@ -1,8 +1,8 @@
 "use client";
+import Counter from "@/components/custom/ProductCounter";
 import { useCart } from "../cart/CartContext";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import Counter from "../../components/ProductCounter";
 
 const CartPage = () => {
   const { cart, clearCart, addToCart, removeFromCart } = useCart();
