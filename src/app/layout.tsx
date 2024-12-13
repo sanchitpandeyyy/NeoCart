@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import { CartProvider } from "./products/cart/CartContext";
 
@@ -28,6 +28,7 @@ export default function RootLayout({
     <CartProvider>
       <html lang="en" className={poppins.variable}>
         <body>
+          <NextTopLoader color="red" />
           <Navbar />
           <SubHeader />
           {children}
