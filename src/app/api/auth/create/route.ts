@@ -29,7 +29,7 @@ export const GET = async () => {
       });
     }
 
-    return NextResponse.json({ user: dbUser });
+    return NextResponse.redirect("/profile", 307);
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json(

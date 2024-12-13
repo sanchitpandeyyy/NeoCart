@@ -8,7 +8,7 @@ const App = () => {
     <div className="bg-[#F6F6F6]">
       <Navbar />
       <Banner />
-    <Card/>
+      <Card />
     </div>
   );
 };
