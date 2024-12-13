@@ -1,5 +1,6 @@
 import CountdownTimer from "./CountdownTime";
 import ProductCard from "../OfferCard";
+import Image from "next/image";
 
 export default function CounterPage() {
   return (
@@ -16,7 +17,9 @@ export default function CounterPage() {
         </div>
 
         <div className=" h-40 relative">
-          <img
+          <Image
+            height={500}
+            width={500}
             src="/images/wine.png"
             alt="Wine Bottle"
             className="object-contain w-full h-full"

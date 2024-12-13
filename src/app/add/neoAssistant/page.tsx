@@ -94,11 +94,9 @@ export default function NepaliSpeechToProductConverter() {
   };
 
   const handleStartSpeechRecognition = async () => {
-    console.log("clicked");
     if (selectedFile) {
-      console.log("two");
+      uploadImage();
       startSpeechRecognition();
-      await uploadImage();
     }
   };
 
