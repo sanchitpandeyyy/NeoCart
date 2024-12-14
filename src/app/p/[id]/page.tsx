@@ -79,7 +79,7 @@ const ProductDetails = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <Breadcrumb items={breadcrumbItems} className="mb-6" />
+        <Breadcrumb items={breadcrumbItems} />
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-8">
             <div className="flex justify-center items-center bg-gray-100 rounded-lg overflow-hidden">
