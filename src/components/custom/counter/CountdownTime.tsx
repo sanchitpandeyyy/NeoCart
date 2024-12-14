@@ -11,38 +11,47 @@ interface TimeLeft {
 
 export default function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    days: 5,
-    hours: 19,
+    days: 3,
+    hours: 12,
     minutes: 12,
     seconds: 0,
   });
 
   useEffect(() => {
+    const savedTime = localStorage.getItem("countdownTime");
+    if (savedTime) {
+      setTimeLeft(JSON.parse(savedTime));
+    }
+
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
+        let newTime = { ...prevTime };
         if (prevTime.seconds > 0) {
-          return { ...prevTime, seconds: prevTime.seconds - 1 };
+          newTime.seconds -= 1;
         } else if (prevTime.minutes > 0) {
-          return { ...prevTime, minutes: prevTime.minutes - 1, seconds: 59 };
+          newTime.minutes -= 1;
+          newTime.seconds = 59;
         } else if (prevTime.hours > 0) {
-          return {
-            ...prevTime,
-            hours: prevTime.hours - 1,
-            minutes: 59,
-            seconds: 59,
-          };
+          newTime.hours -= 1;
+          newTime.minutes = 59;
+          newTime.seconds = 59;
         } else if (prevTime.days > 0) {
-          return {
-            ...prevTime,
-            days: prevTime.days - 1,
-            hours: 23,
-            minutes: 59,
-            seconds: 59,
-          };
+          newTime.days -= 1;
+          newTime.hours = 23;
+          newTime.minutes = 59;
+          newTime.seconds = 59;
         }
-        return prevTime;
+
+        // Save updated time in localStorage
+        localStorage.setItem("countdownTime", JSON.stringify(newTime));
+        return newTime;
       });
     }, 1000);
+
+    return () => {
+      // Clean up the interval when the component unmounts
+      clearInterval(timer);
+    };
   }, []);
 
   return (

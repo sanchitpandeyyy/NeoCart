@@ -61,7 +61,7 @@ export async function POST(request: Request) {
             ? preRres +
 
 
-                `ALWYAS RESPOND ONLY WITH A VALID JSON OBJECT MATCHING THIS STRUCTURE:
+            `ALWYAS RESPOND ONLY WITH A VALID JSON OBJECT MATCHING THIS STRUCTURE:
       {
         "title": "Product Name",
         "description": "Detailed product description in English",
@@ -94,7 +94,6 @@ export async function POST(request: Request) {
           throw new Error("Invalid JSON structure");
         }
 
-        // Return successful response
         return NextResponse.json(parsedResponse, { status: 200 });
       } catch (error) {
         console.error(`Retry ${retries + 1} failed:`, error);
