@@ -119,7 +119,6 @@ export default function EsewaPayment() {
         signed_field_names: paymentData.esewaConfig.signed_field_names,
         signature: paymentData.esewaConfig.signature,
       };
-      console.log({ esewaPayload });
       Object.entries(esewaPayload).forEach(([key, value]) => {
         const input = document.createElement("input");
         input.type = "hidden";

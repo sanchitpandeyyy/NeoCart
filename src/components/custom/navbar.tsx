@@ -2,17 +2,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ShoppingCart, User } from "lucide-react";
-import {
-  getKindeServerSession,
-  LoginLink,
-} from "@kinde-oss/kinde-auth-nextjs/server";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Dialoug } from "./Dialoug";
-
 
 export async function Navbar() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  console.log(user);
 
   return (
     <header className="border-b bg-white ">
@@ -36,8 +31,7 @@ export async function Navbar() {
           ) : (
             <div className="hidden md:flex">
               {/* <LoginLink>Sign in</LoginLink> */}
-              <Dialoug/>
-            
+              <Dialoug />
             </div>
           )}
           <Link href="/products/cart">

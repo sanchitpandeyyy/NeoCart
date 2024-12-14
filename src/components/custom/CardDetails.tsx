@@ -14,7 +14,6 @@ import {
 import { Button } from "@/components/ui/button";
 import Counter from "./ProductCounter";
 
-
 const data = [
   {
     image: "/images/image 58.png",
@@ -123,7 +122,6 @@ const CardDetails = () => {
               <Button
                 className="text-white"
                 onClick={() => {
-                  console.log("Submitted");
                   handleCloseDrawer();
                 }}
               >
@@ -138,7 +136,6 @@ const CardDetails = () => {
           </DrawerContent>
         </Drawer>
       )}
-     
     </div>
   );
 };

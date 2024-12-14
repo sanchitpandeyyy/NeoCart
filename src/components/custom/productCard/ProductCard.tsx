@@ -6,9 +6,9 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { Skeleton } from "../ui/skeleton";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
+import { Skeleton } from "../../ui/skeleton";
+import { Badge } from "../../ui/badge";
+import { Button } from "../../ui/button";
 import { addProduct } from "@/app/actions/product";
 
 interface ProductData {

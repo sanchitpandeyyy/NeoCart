@@ -9,7 +9,6 @@ export function useSpeechRecognition() {
   const [recognition, setRecognition] = useState<any>(null);
 
   const processSpeech = useCallback(async (speechText: string) => {
-    console.log("Processing speech:", speechText);
     try {
       const response = await fetch("/api/process-speech", {
         method: "POST",
@@ -31,7 +30,6 @@ export function useSpeechRecognition() {
   }, []);
 
   const startSpeechRecognition = useCallback(() => {
-    console.log("Starting speech recognition");
     if ("webkitSpeechRecognition" in window) {
       const newRecognition = new (window as any).webkitSpeechRecognition();
       newRecognition.continuous = true; // Enable continuous listening
