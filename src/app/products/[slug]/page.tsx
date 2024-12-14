@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/drawer";
 import Breadcrumb from "@/components/custom/Breadcrumb";
 import Counter from "@/components/custom/ProductCounter";
+import Review from "@/components/custom/Review";
 
 const products = [
   {
@@ -170,6 +171,11 @@ const ProductPage = ({ params }: { params: Promise<{ slug: string }> }) => {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
+      <div>
+      
+        <Review/>
+      
+      </div>
     </div>
   );
 };
