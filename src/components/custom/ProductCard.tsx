@@ -21,9 +21,9 @@ interface ProductData {
 
 export const ProductCard = ({ data }: { data: ProductData }) => {
   return (
-    <Card className="flex flex-col md:flex-row md:items-start space-y-4 md:space-y-0 md:space-x-6 p-4">
+    <Card className="">
       {/* Image Section */}
-      <div className="w-full md:w-1/2">
+      <div className="w-full">
         {data.imageUrl ? (
           <div className="mb-4 md:mb-0">
             <Image
@@ -45,7 +45,7 @@ export const ProductCard = ({ data }: { data: ProductData }) => {
       </div>
 
       {/* Content Section */}
-      <div className="w-full md:w-1/2">
+      <div className="w-full">
         <CardHeader>
           <CardTitle className="text-lg md:text-xl font-semibold">
             {data.title}
@@ -58,7 +58,10 @@ export const ProductCard = ({ data }: { data: ProductData }) => {
           <p className="mb-4 text-sm md:text-base">{data.description}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {data.tags.map((tag) => (
-              <Badge key={tag} className="bg-gray-200 text-black text-xs md:text-sm">
+              <Badge
+                key={tag}
+                className="bg-gray-200 text-black text-xs md:text-sm"
+              >
                 {tag}
               </Badge>
             ))}

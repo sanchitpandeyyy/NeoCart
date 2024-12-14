@@ -68,7 +68,7 @@ const products = [
 
 const ProductPage = ({ params }: { params: Promise<{ slug: string }> }) => {
   const [product, setProduct] = useState<(typeof products)[0] | null>(null);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const { addToCart } = useCart();
   const [openDrawer, setOpenDrawer] = useState(false);
   const router = useRouter();
@@ -94,14 +94,14 @@ const ProductPage = ({ params }: { params: Promise<{ slug: string }> }) => {
     { label: product.name, href: `/products/${product.slug}` },
   ];
 
-  const handleIncrease = () => setCount(count + 1);
-  const handleDecrease = () => setCount(Math.max(count - 1, 0));
-
   const handleAddToCart = () => {
     addToCart(product.slug, product.name, product.price);
-    setCount(0);
-    router.push("/products/cart");
+    setCount(1); // Reset quantity after adding to cart
+    router.push("/products/cart"); // Redirect to the cart page
   };
+
+  const handleIncrease = () => setCount(count + 1);
+  const handleDecrease = () => setCount(Math.max(count - 1, 1)); // Minimum quantity is 1
 
   return (
     <div className="px-4 md:px-20">
@@ -122,7 +122,7 @@ const ProductPage = ({ params }: { params: Promise<{ slug: string }> }) => {
             <p className="text-gray-500">Price: RS {product.price}</p>
             <p className="text-green-600">{product.stock}</p>
             <p className="text-gray-700 mt-2">{product.text}</p>
-            <div className="flex  items-center gap-4 mt-4">
+            <div className="flex items-center gap-4 mt-4">
               <Button
                 onClick={handleAddToCart}
                 className="rounded-md px-4 py-2 bg-green-400 text-white"
@@ -164,6 +164,7 @@ const ProductPage = ({ params }: { params: Promise<{ slug: string }> }) => {
               <Button
                 className="text-white"
                 onClick={() => {
+                  addToCart(product.slug, product.name, product.price * count);
                   setOpenDrawer(false);
                   router.push("/products/checkout");
                 }}

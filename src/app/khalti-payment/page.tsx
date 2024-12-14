@@ -13,12 +13,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Script from "next/script";
+import { useCart } from "../../app/products/cart/CartContext";
 
 export default function KhaltiPayment() {
   const [amount, setAmount] = useState("");
   const [productName, setProductName] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const { cart, removeFromCart, getTotalPrice, getProductName } = useCart();
 
   useEffect(() => {
     const fetchDummyData = async () => {
@@ -94,16 +97,15 @@ export default function KhaltiPayment() {
                 <Input
                   id="amount"
                   type="number"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  required
+                  value={getTotalPrice()}
+                  readOnly
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="productName">Product Name</Label>
                 <Input
                   id="productName"
-                  value={productName}
+                  value={getProductName(cart[0]?.id || "")}
                   onChange={(e) => setProductName(e.target.value)}
                   required
                 />

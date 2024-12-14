@@ -1,9 +1,9 @@
 "use client";
 import PaymentMethods from "@/components/payment-method";
-
 import Summary from "@/app/products/checkout/Billing";
 import CartReview from "@/app/products/checkout/CartReview";
 import React, { useState } from "react";
+import { useCart } from "../../app/products/cart/CartContext";
 
 const steps = [
   { id: 1, label: "Cart Review", btn: "Next" },
@@ -13,6 +13,8 @@ const steps = [
 
 const Stepper = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const { cart, getTotalPrice } = useCart();
+  const totalPrice = getTotalPrice();
 
   const handleNext = () => {
     if (currentStep < steps.length) {
@@ -72,7 +74,7 @@ const Stepper = () => {
         )}
         {currentStep === 3 && (
           <p className="text-gray-700 ">
-            <PaymentMethods />
+            <PaymentMethods totalPrice={totalPrice} />
           </p>
         )}
       </div>
