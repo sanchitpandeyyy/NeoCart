@@ -16,12 +16,17 @@ import Script from "next/script";
 import { useCart } from "../../app/products/cart/CartContext";
 
 export default function KhaltiPayment() {
-  const [amount, setAmount] = useState("");
-  const [productName, setProductName] = useState("");
-  const [transactionId, setTransactionId] = useState("");
+  const [transactionId, setTransactionId] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { cart, removeFromCart, getTotalPrice, getProductName } = useCart();
+  const { cart, getTotalPrice, getProductName } = useCart();
+
+  // Default values if cart is empty
+  const amount = getTotalPrice().toString();
+  const productName =
+    cart.length > 0
+      ? cart.map((item) => item.name).join(", ")
+      : "No products selected";
 
   useEffect(() => {
     const fetchDummyData = async () => {
@@ -31,8 +36,6 @@ export default function KhaltiPayment() {
           throw new Error("Failed to fetch dummy data");
         }
         const data = await response.json();
-        setAmount(data.amount);
-        setProductName(data.productName);
         setTransactionId(data.transactionId);
       } catch (error) {
         console.error("Error fetching dummy data:", error);
@@ -94,21 +97,11 @@ export default function KhaltiPayment() {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="amount">Amount (NPR)</Label>
-                <Input
-                  id="amount"
-                  type="number"
-                  value={getTotalPrice()}
-                  readOnly
-                />
+                <Input id="amount" type="text" value={amount} readOnly />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="productName">Product Name</Label>
-                <Input
-                  id="productName"
-                  value={getProductName(cart[0]?.id || "")}
-                  onChange={(e) => setProductName(e.target.value)}
-                  required
-                />
+                <Input id="productName" value={productName} readOnly />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="transactionId">Transaction ID</Label>
