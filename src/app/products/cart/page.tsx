@@ -9,8 +9,7 @@ const CartPage = () => {
   const router = useRouter();
 
   const handleCheckout = () => {
-    alert("Proceeding to checkout..."); //
-    router.push("/checkout");
+    router.push("/products/checkout");
   };
 
   const handleIncreaseQuantity = (id: string) => {
@@ -23,7 +22,7 @@ const CartPage = () => {
   const handleDecreaseQuantity = (id: string) => {
     const item = cart.find((item) => item.id === id);
     if (item && item.quantity > 1) {
-      addToCart(item.id, item.name, item.price); // Decrease quantity by 1
+      addToCart(item.id, item.name, item.price);
     }
   };
 
@@ -81,7 +80,7 @@ const CartPage = () => {
               </Button>
               <Button
                 onClick={handleCheckout}
-                className="bg-green-500 text-white hover:bg-green-600 transition-colors"
+                className=" text-white hover:bg-green-600 transition-colors"
               >
                 Proceed to Checkout
               </Button>

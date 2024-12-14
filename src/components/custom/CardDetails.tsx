@@ -53,34 +53,38 @@ const CardDetails = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-4 md:p-6">
       {data.map((item, index) => (
         <div
           key={index}
-          className="border grid grid-cols-12 rounded-lg p-4 shadow-md items-center mb-6"
+          className="border grid grid-cols-1 md:grid-cols-12 rounded-lg p-4 shadow-md items-center mb-6 gap-4"
         >
-          <div className="col-span-5">
+          <div className="md:col-span-5 flex justify-center">
             <Image
               src={item.image}
               alt={item.name}
               width={200}
               height={200}
-              className="rounded-lg w-[350px]"
+              className="rounded-lg w-full max-w-xs md:w-[350px] object-cover"
             />
           </div>
-          <div className="col-span-7 flex flex-col gap-2">
-            <h3 className="text-lg font-semibold mt-2 flex items-center gap-2">
+          <div className="md:col-span-7 flex flex-col gap-2">
+            <h3 className="text-lg md:text-xl font-semibold mt-2 flex items-center gap-2">
               {item.name}
             </h3>
-            <p className="text-gray-500">Price: RS {item.price}</p>
-            <p className="text-green-600">{item.stock}</p>
-            <p className="text-gray-700  mt-2">{item.text}</p>
-            <div className="flex items-center gap-8 mt-4 justify-start">
-              <button className="rounded-md w-fit px-4 py-2 bg-green-400 text-white">
+            <p className="text-gray-500 text-sm md:text-base">
+              Price: RS {item.price}
+            </p>
+            <p className="text-green-600 text-sm md:text-base">{item.stock}</p>
+            <p className="text-gray-700 text-sm md:text-base mt-2">
+              {item.text}
+            </p>
+            <div className="flex flex-wrap items-center gap-4 mt-4">
+              <button className="rounded-md px-4 py-2 bg-green-400 text-white text-sm md:text-base">
                 {item.add}
               </button>
               <button
-                className="rounded-md w-fit px-4 py-2 text-white bg-[#2252a1]"
+                className="rounded-md px-4 py-2 text-white bg-[#2252a1] text-sm md:text-base"
                 onClick={() => setOpenDrawerIndex(index)}
               >
                 {item.btn}
@@ -90,7 +94,6 @@ const CardDetails = () => {
         </div>
       ))}
 
-      {/* Drawer */}
       {openDrawerIndex !== null && (
         <Drawer open={true} onOpenChange={handleCloseDrawer}>
           <DrawerTrigger />
@@ -102,7 +105,9 @@ const CardDetails = () => {
               </DrawerDescription>
             </DrawerHeader>
             <div className="flex flex-col items-center gap-4">
-              <p>Price per unit: RS {data[openDrawerIndex].price}</p>
+              <p className="text-sm md:text-base">
+                Price per unit: RS {data[openDrawerIndex].price}
+              </p>
               <Counter
                 count={counts[openDrawerIndex]}
                 onIncrease={() => handleIncrease(openDrawerIndex)}

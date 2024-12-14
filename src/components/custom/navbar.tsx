@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import Image from "next/image";
 import {
   getKindeServerSession,
@@ -9,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Search, ShoppingCart, User, Menu } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+
+import { Dialoug } from "./Dialoug";
 
 export async function Navbar() {
   const { getUser } = getKindeServerSession();
@@ -58,9 +61,10 @@ export async function Navbar() {
               </Button>
             </Link>
           ) : (
-            <Button asChild variant="ghost" className="hidden md:inline-flex">
-              <LoginLink>Sign in</LoginLink>
-            </Button>
+            <div className="hidden md:flex">
+              {/* <LoginLink>Sign in</LoginLink> */}
+              <Dialoug />
+            </div>
           )}
 
           <Link href="/products/cart">

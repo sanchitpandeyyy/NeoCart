@@ -7,13 +7,15 @@ type CartItem = {
   name: string;
   price: number;
   quantity: number;
+  image?: string; // Optional field for product image
 };
 
 type CartContextType = {
   cart: CartItem[];
-  addToCart: (id: string, name: string, price: number) => void;
+  addToCart: (id: string, name: string, price: number, image?: string) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
+  getTotalPrice: () => number;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -21,7 +23,12 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (id: string, name: string, price: number) => {
+  const addToCart = (
+    id: string,
+    name: string,
+    price: number,
+    image?: string
+  ) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === id);
       if (existingProduct) {
@@ -29,7 +36,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           item.id === id ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        return [...prevCart, { id, name, price, quantity: 1 }];
+        return [...prevCart, { id, name, price, quantity: 1, image }];
       }
     });
   };
@@ -40,9 +47,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = () => setCart([]);
 
+  const getTotalPrice = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, clearCart }}
+      value={{ cart, addToCart, removeFromCart, clearCart, getTotalPrice }}
     >
       {children}
     </CartContext.Provider>

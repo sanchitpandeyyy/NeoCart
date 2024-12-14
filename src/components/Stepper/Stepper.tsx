@@ -1,12 +1,14 @@
-'use client';
+"use client";
+import PaymentMethods from "@/components/payment-method";
 
-import React, { useState } from 'react';
+import Summary from "@/app/products/checkout/Billing";
+import CartReview from "@/app/products/checkout/CartReview";
+import React, { useState } from "react";
 
 const steps = [
-  { id: 1, label: 'Cart Review' },
-  { id: 2, label: 'Shipping Information' },
-  { id: 3, label: 'Payment Method' },
-  { id: 4, label: 'Confirmation' },
+  { id: 1, label: "Cart Review", btn: "Next" },
+  { id: 2, label: "Shipping Information", btn: "Place Order" },
+  { id: 3, label: "Payment Method", btn: "Confirm" },
 ];
 
 const Stepper = () => {
@@ -31,24 +33,21 @@ const Stepper = () => {
       {/* Stepper */}
       <div className="flex justify-between items-center mb-8">
         {steps.map((step) => (
-          <div
-            key={step.id}
-            className="flex flex-col items-center text-center"
-          >
+          <div key={step.id} className="flex flex-col items-center text-center">
             <div
               className={`w-10 h-10 flex items-center justify-center rounded-full border-2 ${
                 currentStep === step.id
-                  ? 'bg-blue-500 text-white border-blue-500'
+                  ? "bg-blue-500 text-white border-blue-500"
                   : currentStep > step.id
-                  ? 'bg-green-500 text-white border-green-500'
-                  : 'bg-gray-200 text-gray-600 border-gray-300'
+                  ? "bg-green-500 text-white border-green-500"
+                  : "bg-gray-200 text-gray-600 border-gray-300"
               }`}
             >
               {step.id}
             </div>
             <p
               className={`text-sm mt-2 ${
-                currentStep >= step.id ? 'text-blue-500' : 'text-gray-500'
+                currentStep >= step.id ? "text-blue-500" : "text-gray-500"
               }`}
             >
               {step.label}
@@ -60,23 +59,20 @@ const Stepper = () => {
       {/* Step Content */}
       <div className="border p-6 rounded-lg shadow-md bg-white">
         {currentStep === 1 && (
-          <p className="text-gray-700">
+          <p className="text-gray-700 flex gap-8 flex-col h-fit ">
             Review the items in your cart before proceeding to checkout.
+            <CartReview />
           </p>
         )}
         {currentStep === 2 && (
-          <p className="text-gray-700">
+          <p className="text-gray-700 flex gap-8 flex-col h-fit ">
             Provide your shipping address to calculate delivery options.
+            <Summary />
           </p>
         )}
         {currentStep === 3 && (
-          <p className="text-gray-700">
-            Choose your payment method to complete the purchase.
-          </p>
-        )}
-        {currentStep === 4 && (
-          <p className="text-gray-700">
-            Confirm your order details and complete the payment.
+          <p className="text-gray-700 ">
+            <PaymentMethods />
           </p>
         )}
       </div>
@@ -86,8 +82,8 @@ const Stepper = () => {
         <button
           className={`px-4 py-2 rounded-md text-white ${
             currentStep === 1
-              ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-gray-500 hover:bg-gray-600'
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-gray-500 hover:bg-gray-600"
           }`}
           disabled={currentStep === 1}
           onClick={handlePrevious}
@@ -97,13 +93,13 @@ const Stepper = () => {
         <button
           className={`px-4 py-2 rounded-md text-white ${
             currentStep === steps.length
-              ? 'bg-green-500 cursor-not-allowed'
-              : 'bg-blue-500 hover:bg-blue-600'
+              ? "bg-green-500 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-600"
           }`}
           disabled={currentStep === steps.length}
           onClick={handleNext}
         >
-          {currentStep === steps.length ? 'Finish' : 'Next'}
+          {currentStep !== steps.length && steps[currentStep - 1].btn}
         </button>
       </div>
     </div>

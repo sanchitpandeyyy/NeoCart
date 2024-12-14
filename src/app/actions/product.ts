@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import prisma from "@/lib/prisma";
@@ -33,6 +34,8 @@ export const addProduct = async (data: FormData): Promise<void> => {
       description: newProduct.desc,
       tags: newProduct.category,
     });
+
+    redirect(process.env.NEXT_PUBLIC_URL + "/addProduct");
   } catch (error: any) {
     console.error("Failed to create product:", error.message, error.stack);
     throw new Error("Failed to create product");
