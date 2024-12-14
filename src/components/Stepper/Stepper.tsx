@@ -99,7 +99,7 @@ const Stepper = () => {
           disabled={currentStep === steps.length}
           onClick={handleNext}
         >
-          {currentStep !== steps.length && steps[currentStep - 1].btn}
+          {steps[currentStep - 1].btn}
         </button>
       </div>
     </div>

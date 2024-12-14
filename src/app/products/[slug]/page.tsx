@@ -163,7 +163,10 @@ const ProductPage = ({ params }: { params: Promise<{ slug: string }> }) => {
             <DrawerFooter className="flex justify-end gap-4">
               <Button
                 className="text-white"
-                onClick={() => setOpenDrawer(false)}
+                onClick={() => {
+                  setOpenDrawer(false);
+                  router.push("/products/checkout");
+                }}
               >
                 Submit
               </Button>
