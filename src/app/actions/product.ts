@@ -30,6 +30,8 @@ export const addProduct = async (data: FormData): Promise<void> => {
     });
     console.log("Product created:", newProduct);
     addToVectorDB({
+      id: newProduct.id,
+      price: newProduct.price,
       name: newProduct.name,
       description: newProduct.desc,
       tags: newProduct.category,

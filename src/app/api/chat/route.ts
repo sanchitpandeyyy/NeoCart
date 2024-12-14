@@ -141,6 +141,7 @@ export async function POST(req: NextRequest) {
          - Understand customer needs and preferences
          - Recommend only and only and only relevant products from the catalog which highly match their needs 100% 
          - Explain why each recommendation fits their needs
+         - Try to recommend at least 1 product
      
       Respond ONLY if found 100% matching product with a valid JSON object matching this structure for this query : ${latestMessage}, 
       {
