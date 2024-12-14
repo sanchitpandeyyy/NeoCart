@@ -8,7 +8,7 @@ import { Mic, Loader2, ImageIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
-import { ProductCard } from "@/components/custom/ProductCard";
+import { ProductCard } from "@/components/custom/productCard/ProductCard";
 
 interface ProductData {
   title: string;
