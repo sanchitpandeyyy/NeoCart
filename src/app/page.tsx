@@ -9,6 +9,7 @@ const Home = () => {
   return (
     <div className="mt-2 container">
       <HeroLander />
+      <h2 className="mb-8 text-3xl font-bold">Hot Deals</h2>
       <HotDeals />
       <Card />
       <Link href="/neoAssistant" className="fixed z-20 bottom-10 right-10">
