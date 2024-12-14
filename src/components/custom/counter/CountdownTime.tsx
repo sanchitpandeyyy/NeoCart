@@ -43,8 +43,6 @@ export default function CountdownTimer() {
         return prevTime;
       });
     }, 1000);
-
-    return () => clearInterval(timer);
   }, []);
 
   return (
