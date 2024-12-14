@@ -10,7 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { addProduct } from "@/app/actions/product";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { MinusCircle, DollarSign, Upload } from "lucide-react";
+import { MinusCircle, Upload } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 
@@ -99,7 +99,6 @@ export default function AddProductForm() {
                 Price
               </Label>
               <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                 <Input
                   id="price"
                   type="number"

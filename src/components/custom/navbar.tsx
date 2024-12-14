@@ -29,7 +29,7 @@ export async function Navbar() {
             <Input placeholder="Search products..." className="w-full" />
           </div>
 
-          <Link href="/add/neoAi">
+          <Link href="/add/neoai">
             <Button className="bg-secondary">NeoAi</Button>
           </Link>
 

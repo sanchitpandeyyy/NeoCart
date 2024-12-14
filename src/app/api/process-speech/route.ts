@@ -32,8 +32,7 @@ export async function POST(request: Request) {
       1. Extract a concise product title in English
       2. Create a detailed English description of around 100 words (min 60 words)
       3. List useful tags related to the product (min 5, max 10 tags)
-      4. List relevant categories only form (spices, herbs and medicines, food, handcraft, decorative, clothing )
-      5. Identify the exact price in numerical format
+      4. Identify the exact price in numerical format
       
       Input Nepali Speech: "${nepaliSpeech}"
       
@@ -42,7 +41,6 @@ export async function POST(request: Request) {
         "title": "Product Name",
         "description": "Detailed product description in English",
         "tags": ["tag 1", "tag 2"],
-        "categories" :["category 1", "category 2"],
         "price": 00000
       }
     `;
@@ -59,9 +57,7 @@ export async function POST(request: Request) {
         const result = await model.generateContent(
           preRres
             ? preRres +
-
-
-            `ALWYAS RESPOND ONLY WITH A VALID JSON OBJECT MATCHING THIS STRUCTURE:
+                `ALWYAS RESPOND ONLY WITH A VALID JSON OBJECT MATCHING THIS STRUCTURE:
       {
         "title": "Product Name",
         "description": "Detailed product description in English",
@@ -93,7 +89,6 @@ export async function POST(request: Request) {
         ) {
           throw new Error("Invalid JSON structure");
         }
-
         return NextResponse.json(parsedResponse, { status: 200 });
       } catch (error) {
         console.error(`Retry ${retries + 1} failed:`, error);
