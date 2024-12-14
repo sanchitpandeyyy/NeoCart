@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,70 +13,43 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { DummyDataResponse } from "@/lib/types";
-import { useToast } from "@/hooks/use-toast";
+import Script from "next/script";
+import { useCart } from "../../app/products/cart/CartContext";
 
-interface EsewaConfig {
-  tax_amount: number;
-  total_amount: number;
-  transaction_uuid: string;
-  product_code: string;
-  product_service_charge: number;
-  product_delivery_charge: number;
-  success_url: string;
-  failure_url: string;
-  signed_field_names: string;
-  signature: string;
-}
-
-interface PaymentResponse {
-  amount: string;
-  esewaConfig: EsewaConfig;
-}
-
-export default function EsewaPayment() {
-  const [amount, setAmount] = useState<string>("");
-  const [productName, setProductName] = useState<string>("");
+export default function KhaltiPayment() {
+  const router = useRouter();
+  const { cart, getTotalPrice, getProductName } = useCart();
   const [transactionId, setTransactionId] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Get amount and product name from the cart
+  const amount = getTotalPrice().toString();
+  const productName = cart.map((item) => item.name).join(", "); // Combine all product names
 
   useEffect(() => {
     const fetchDummyData = async () => {
+      if (!amount || !productName) return;
+
       try {
-        const response = await fetch("/api/dummy-data?method=esewa");
+        const response = await fetch(
+          `/api/dummy-data?method=khalti&totalPrice=${amount}&productName=${productName}`
+        );
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error("Failed to fetch dummy data");
         }
-        const data: DummyDataResponse = await response.json();
-        setAmount(data.amount);
-        setProductName(data.productName);
+        const data = await response.json();
         setTransactionId(data.transactionId);
-
-        toast({
-          title: "Data loaded successfully",
-          description: "Payment details have been pre-filled.",
-        });
       } catch (error) {
-        const errorMessage =
-          error instanceof Error ? error.message : "An unknown error occurred";
-        console.error("Error fetching dummy data:", errorMessage);
-
-        toast({
-          variant: "destructive",
-          title: "Error loading data",
-          description: "Failed to load initial data. Please refresh the page.",
-        });
+        console.error("Error fetching dummy data:", error);
       }
     };
 
     fetchDummyData();
-  }, [toast]);
-  const handlePayment = async (e: React.FormEvent<HTMLFormElement>) => {
+  }, [amount, productName]);
+
+  const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError(null);
 
     try {
       const response = await fetch("/api/initiate-payment", {
@@ -84,7 +58,7 @@ export default function EsewaPayment() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          method: "esewa",
+          method: "khalti",
           amount,
           productName,
           transactionId,
@@ -92,120 +66,70 @@ export default function EsewaPayment() {
       });
 
       if (!response.ok) {
-        throw new Error(`Payment initiation failed: ${response.statusText}`);
+        throw new Error("Payment initiation failed");
       }
 
-      const paymentData: PaymentResponse = await response.json();
-      toast({
-        title: "Payment Initiated",
-        description: "Redirecting to eSewa payment gateway...",
-      });
+      const data = await response.json();
 
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
-
-      const esewaPayload = {
-        amount: paymentData.amount,
-        tax_amount: paymentData.esewaConfig.tax_amount,
-        total_amount: paymentData.esewaConfig.total_amount,
-        transaction_uuid: paymentData.esewaConfig.transaction_uuid,
-        product_code: paymentData.esewaConfig.product_code,
-        product_service_charge: paymentData.esewaConfig.product_service_charge,
-        product_delivery_charge:
-          paymentData.esewaConfig.product_delivery_charge,
-        success_url: paymentData.esewaConfig.success_url,
-        failure_url: paymentData.esewaConfig.failure_url,
-        signed_field_names: paymentData.esewaConfig.signed_field_names,
-        signature: paymentData.esewaConfig.signature,
-      };
-      Object.entries(esewaPayload).forEach(([key, value]) => {
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = key;
-        input.value = String(value);
-        form.appendChild(input);
-      });
-
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
+      if (!data.khaltiPaymentUrl) {
+        throw new Error("Khalti payment URL not received");
+      }
+      window.location.href = data.khaltiPaymentUrl;
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "An unknown error occurred";
-      console.error("Payment error:", errorMessage);
-      setError("Payment initiation failed. Please try again.");
-      toast({
-        variant: "destructive",
-        title: "Payment Error",
-        description: "Payment initiation failed. Please try again.",
-      });
+      console.error("Payment error:", error);
+      alert("Payment initiation failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-full max-w-md mx-4">
-        <CardHeader>
-          <CardTitle>eSewa Payment</CardTitle>
-          <CardDescription>Enter payment details for eSewa</CardDescription>
-        </CardHeader>
-        <form onSubmit={handlePayment}>
-          <CardContent className="space-y-4">
-            {error && (
-              <div className="text-red-500 text-sm bg-red-50 p-2 rounded">
-                {error}
+    <>
+      <Script
+        src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.22.0.0.0/khalti-checkout.iffe.js"
+        strategy="lazyOnload"
+      />
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <Card className="w-full max-w-md mx-4">
+          <CardHeader>
+            <CardTitle>Khalti Payment</CardTitle>
+            <CardDescription>
+              Complete your payment using Khalti
+            </CardDescription>
+          </CardHeader>
+          <form onSubmit={handlePayment}>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="amount">Amount (NPR)</Label>
+                <Input id="amount" type="text" value={amount} readOnly />
               </div>
-            )}
-            <div className="space-y-2">
-              <Label htmlFor="amount">Amount (NPR)</Label>
-              <Input
-                id="amount"
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                required
-                min="1"
-                step="0.01"
-                placeholder="Enter amount"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="productName">Product Name</Label>
-              <Input
-                id="productName"
-                value={productName}
-                onChange={(e) => setProductName(e.target.value)}
-                required
-                placeholder="Enter product name"
-                maxLength={100}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="transactionId">Transaction ID</Label>
-              <Input
-                id="transactionId"
-                value={transactionId}
-                onChange={(e) => setTransactionId(e.target.value)}
-                required
-                placeholder="Enter transaction ID"
-                maxLength={50}
-              />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={isLoading || !amount || !productName || !transactionId}
-            >
-              {isLoading ? "Processing..." : "Pay with eSewa"}
-            </Button>
-          </CardFooter>
-        </form>
-      </Card>
-    </div>
+              <div className="space-y-2">
+                <Label htmlFor="productName">Product Name</Label>
+                <Input
+                  id="productName"
+                  type="text"
+                  value={productName}
+                  readOnly
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="transactionId">Transaction ID</Label>
+                <Input
+                  id="transactionId"
+                  type="text"
+                  value={transactionId}
+                  readOnly
+                />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Processing..." : "Pay with Khalti"}
+              </Button>
+            </CardFooter>
+          </form>
+        </Card>
+      </div>
+    </>
   );
 }

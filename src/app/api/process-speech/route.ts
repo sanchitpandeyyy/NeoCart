@@ -59,6 +59,8 @@ export async function POST(request: Request) {
         const result = await model.generateContent(
           preRres
             ? preRres +
+
+
                 `ALWYAS RESPOND ONLY WITH A VALID JSON OBJECT MATCHING THIS STRUCTURE:
       {
         "title": "Product Name",
