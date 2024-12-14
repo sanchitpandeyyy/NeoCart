@@ -10,6 +10,7 @@ import { products } from "@/lib/data";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { getProductById } from "@/app/actions/product";
+import Link from "next/link";
 
 export type Product = {
   id: number;
@@ -42,47 +43,57 @@ const ProductCards: React.FC<ProductCardsProps> = ({ data }) => {
     fetchData();
   }, [data]);
 
-  if (res.length > 0)
-    return (
-      <ScrollArea
-        className={`flex-grow pr-4 pb-10 h-[550px] scroll-area ${
-          res.length === 0 && "hidden"
-        }`}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
-          {res.map((product) => (
-            <Card key={product?.id} className="flex flex-col">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <Badge variant="outline">ID: {product?.id}</Badge>
-                  <span className="text-2xl font-bold text-primary">
-                    {product?.price}
-                  </span>
-                </div>
-                <h3 className="text-lg font-semibold line-clamp-2">
-                  {product?.name}
-                </h3>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
-                  {product?.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
+  console.log(res);
+  return (
+    <ScrollArea
+      className={`flex-grow pr-4 pb-10 h-[550px] scroll-area ${
+        res.length === 0 && "hidden"
+      }`}
+    >
+      <div className="grid gap-4 grid-cols-2 ">
+        {res &&
+          res.map((product) => (
+            <>
+              <Card key={product?.id} className="flex flex-col">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge variant="outline">ID: {product?.id}</Badge>
+                    <span className="text-2xl font-bold text-primary">
+                      {product?.price}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-semibold line-clamp-2">
+                    {product?.name}
+                  </h3>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+                    {product?.desc}
+                  </p>
+                  {/* <div className="flex flex-wrap gap-2">
                   {product?.tags.map((tag, index) => (
                     <Badge key={index} variant="secondary">
                       {tag}
                     </Badge>
                   ))}
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full">View Details</Button>
-              </CardFooter>
-            </Card>
+                </div> */}
+                </CardContent>
+                <CardFooter>
+                  <Link href={`/p/${product?.id}`}>
+                    <Button className="w-full">View Details</Button>
+                  </Link>
+                </CardFooter>
+              </Card>
+            </>
           ))}
-        </div>
-      </ScrollArea>
-    );
+      </div>
+      {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+        {res.map((product) => (
+          
+        ))}
+      </div> */}
+    </ScrollArea>
+  );
 };
 
 export default ProductCards;
