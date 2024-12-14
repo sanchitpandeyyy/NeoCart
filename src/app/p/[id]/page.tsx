@@ -65,7 +65,7 @@ const ProductDetails = () => {
   }
   const breadcrumbItems = [
     { label: "Home", href: "/" },
-    { label: product.name, href: `/products/${params.id}` },
+    { label: product.name, href: `/p/${params.id}` },
   ];
 
   const handleIncrease = () => setCount(count + 1);

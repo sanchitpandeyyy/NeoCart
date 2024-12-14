@@ -17,9 +17,10 @@ export async function Navbar() {
           <Link href="/" className="text-2xl font-bold text-blue-600">
             <Image
               src="/images/neocart.png"
-              height={60}
-              width={60}
+              height={600}
+              width={600}
               alt="hero logo"
+              className="w-14 h-auto"
             />
           </Link>
         </div>
@@ -27,6 +28,11 @@ export async function Navbar() {
           <div className="hidden md:flex relative w-96">
             <Input placeholder="Search products..." className="w-full" />
           </div>
+
+          <Link href="/add/neoAi">
+            <Button className="bg-secondary">NeoAi</Button>
+          </Link>
+
           {user?.id ? (
             <Link href="/profile">
               <Button size="icon">
