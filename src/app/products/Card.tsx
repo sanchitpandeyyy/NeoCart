@@ -14,7 +14,7 @@ const data = [
     slug: "milk-churpi",
   },
   {
-    image: "/images/image 58.png",
+    image: "/images/yarsagumba.png",
     productname: "Yarsagumba",
     discount: "20% off",
     price: "Rs 400",
@@ -24,7 +24,7 @@ const data = [
     slug: "yarsagumba",
   },
   {
-    image: "/images/apple.jpg",
+    image: "/images/orange.jpg",
     productname: "Fresh Orange",
     discount: "15% off",
     price: "Rs 500",
@@ -34,7 +34,7 @@ const data = [
     slug: "fresh-orange",
   },
   {
-    image: "/images/apple.jpg",
+    image: "/images/Himalayansalt.jpg",
     productname: "Himalayan Salt",
     discount: "10% off",
     price: "Rs 300",
