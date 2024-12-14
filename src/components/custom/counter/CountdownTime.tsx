@@ -48,28 +48,30 @@ export default function CountdownTimer() {
   }, []);
 
   return (
-    <div className="flex gap-8">
+    <div className="flex flex-wrap gap-4 justify-center items-center">
       <div className="text-center">
-        <div className="text-4xl font-bold text-red-600">{timeLeft.days}</div>
-        <div className="text-xs uppercase text-gray-600">Days</div>
+        <div className="text-4xl font-bold text-red-600 sm:text-5xl">
+          {timeLeft.days}
+        </div>
+        <div className="text-xs uppercase text-gray-600 sm:text-sm">Days</div>
       </div>
       <div className="text-center">
-        <div className="text-4xl font-bold text-red-600">
+        <div className="text-4xl font-bold text-red-600 sm:text-5xl">
           {timeLeft.hours.toString().padStart(2, "0")}
         </div>
-        <div className="text-xs uppercase text-gray-600">Hours</div>
+        <div className="text-xs uppercase text-gray-600 sm:text-sm">Hours</div>
       </div>
       <div className="text-center">
-        <div className="text-4xl font-bold text-red-600">
+        <div className="text-4xl font-bold text-red-600 sm:text-5xl">
           {timeLeft.minutes.toString().padStart(2, "0")}
         </div>
-        <div className="text-xs uppercase text-gray-600">Min</div>
+        <div className="text-xs uppercase text-gray-600 sm:text-sm">Min</div>
       </div>
       <div className="text-center">
-        <div className="text-4xl font-bold text-red-600">
+        <div className="text-4xl font-bold text-red-600 sm:text-5xl">
           {timeLeft.seconds.toString().padStart(2, "0")}
         </div>
-        <div className="text-xs uppercase text-gray-600">Sec</div>
+        <div className="text-xs uppercase text-gray-600 sm:text-sm">Sec</div>
       </div>
     </div>
   );
