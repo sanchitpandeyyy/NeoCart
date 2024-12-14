@@ -21,9 +21,11 @@ interface ProductData {
 
 export const ProductCard = ({ data }: { data: ProductData }) => {
   return (
-    <Card className="flex flex-col md:items-start space-y-4 md:space-y-0 md:space-x-6 p-4">
+
+    <Card className="">
       {/* Image Section */}
-      <div className="w-full ">
+      <div className="w-full">
+
         {data.imageUrl ? (
           <div className="mb-4 md:mb-0">
             <Image

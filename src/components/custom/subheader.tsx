@@ -29,7 +29,8 @@ export default function Subheader() {
   const pathname = usePathname();
 
   return (
-    <div className="hidden sm:block bg-secondary">
+
+    <div className="bg-secondary hidden lg:block">
       <div className="container h-20">
         <nav className="flex h-full gap-10 items-center justify-center px-4">
           {navigation.map((item) => {
