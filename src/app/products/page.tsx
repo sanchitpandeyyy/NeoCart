@@ -8,7 +8,8 @@ export default async function HotDeals() {
   const hotDeals = await getProducts();
 
   return (
-    <section className="py-12">
+    <section className="p-12">
+      <h2 className="mb-8 text-3xl font-bold">Products</h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {hotDeals.map((product) => (
           <Card key={product.id}>
