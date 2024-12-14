@@ -10,7 +10,6 @@ import {
 export async function Navbar() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  console.log(user);
 
   return (
     <header className="border-b bg-white ">

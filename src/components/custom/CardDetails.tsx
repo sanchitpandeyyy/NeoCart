@@ -117,7 +117,6 @@ const CardDetails = () => {
               <Button
                 className="text-white"
                 onClick={() => {
-                  console.log("Submitted");
                   handleCloseDrawer();
                 }}
               >

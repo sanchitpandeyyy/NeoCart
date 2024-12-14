@@ -12,10 +12,9 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-    console.log("Received Nepali speech:", nepaliSpeech);
 
     // Check API key
-    if (!process.env.GOOGLE_GEMINI_API_KEY) {
+    if (!process.env.GOOGLE_AI_API_KEY) {
       return NextResponse.json(
         { error: "API key is missing" },
         { status: 500 }
@@ -23,7 +22,7 @@ export async function POST(request: Request) {
     }
 
     // Initialize Gemini AI
-    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
+    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-002" });
 
     // Prompt for JSON extraction
