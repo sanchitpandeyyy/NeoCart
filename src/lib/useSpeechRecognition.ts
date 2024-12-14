@@ -10,6 +10,7 @@ export function useSpeechRecognition() {
 
   const processSpeech = useCallback(async (speechText: string) => {
     try {
+      console.log("speechText", speechText);
       const response = await fetch("/api/process-speech", {
         method: "POST",
         headers: {
@@ -18,6 +19,7 @@ export function useSpeechRecognition() {
         body: JSON.stringify({ nepaliSpeech: speechText }),
       });
       if (!response.ok) {
+        console.log("res is not kk");
         throw new Error("Failed to process speech");
       }
       const data = await response.json();

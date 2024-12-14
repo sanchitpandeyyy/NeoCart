@@ -51,3 +51,13 @@ export const getProductById = async (id: string) => {
     throw new Error("Failed to get product");
   }
 };
+
+export const getProducts = async () => {
+  try {
+    const products = await prisma.product.findMany();
+    return products;
+  } catch (error: any) {
+    console.error("Failed to get products:", error.message, error.stack);
+    throw new Error("Failed to get products");
+  }
+};

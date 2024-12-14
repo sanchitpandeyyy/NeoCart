@@ -11,6 +11,8 @@ import { addProduct } from "@/app/actions/product";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { MinusCircle, DollarSign, Upload } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
 
 const categories = [
   "Electronics",
@@ -66,7 +68,7 @@ export default function AddProductForm() {
   };
 
   return (
-    <Card className="w-full container">
+    <Card className="w-full max-w-4xl mx-auto">
       <CardHeader className="space-y-1">
         <CardTitle className="text-3xl font-bold text-center">
           Add New Product
@@ -78,16 +80,36 @@ export default function AddProductForm() {
       <CardContent>
         <form action={addProduct} className="space-y-8">
           <input type="hidden" name="images" value={imageUrls} />
-          <div className="space-y-2">
-            <Label htmlFor="name" className="text-lg font-semibold">
-              Product Name
-            </Label>
-            <Input
-              id="name"
-              name="name"
-              className="text-lg"
-              placeholder="Enter product name"
-            />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-lg font-semibold">
+                Product Name
+              </Label>
+              <Input
+                id="name"
+                name="name"
+                className="text-lg"
+                placeholder="Enter product name"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="price" className="text-lg font-semibold">
+                Price
+              </Label>
+              <div className="relative">
+                <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                <Input
+                  id="price"
+                  type="number"
+                  step="0.01"
+                  name="price"
+                  className="pl-10 text-lg"
+                  placeholder="0.00"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="space-y-2">
@@ -130,67 +152,57 @@ export default function AddProductForm() {
                   />
                 </div>
               )}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {imageUrls.map((url, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden group"
-                  >
-                    <img
-                      src={url}
-                      alt={`Product ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                    <Button
-                      type="button"
-                      variant="destructive"
-                      size="icon"
-                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                      onClick={() =>
-                        setImageUrls(imageUrls.filter((_, i) => i !== index))
-                      }
+              <ScrollArea className="h-72 w-full rounded-md border">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                  {imageUrls.map((url, index) => (
+                    <div
+                      key={index}
+                      className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden group"
                     >
-                      <MinusCircle className="h-4 w-4" />
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="price" className="text-lg font-semibold">
-              Price
-            </Label>
-            <div className="relative">
-              <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-              <Input
-                id="price"
-                type="number"
-                step="0.01"
-                name="price"
-                className="pl-10 text-lg"
-                placeholder="0.00"
-              />
+                      <img
+                        src={url}
+                        alt={`Product ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="icon"
+                        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                        onClick={() =>
+                          setImageUrls(imageUrls.filter((_, i) => i !== index))
+                        }
+                      >
+                        <MinusCircle className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
             </div>
           </div>
 
           <div className="space-y-4">
             <Label className="text-lg font-semibold">Categories</Label>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
-                <div
+                <label
                   key={category}
-                  className="flex items-center space-x-2 bg-secondary/20 rounded-lg p-3 transition-colors hover:bg-secondary/30"
+                  className="flex items-center space-x-2 bg-secondary/20 rounded-full px-4 py-2 transition-colors hover:bg-secondary/30 cursor-pointer"
                 >
-                  <Checkbox id={category} value={category} name="category" />
-                  <Label
-                    htmlFor={category}
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  <Checkbox
+                    id={category}
+                    value={category}
+                    name="category"
+                    className="sr-only"
+                  />
+                  <Badge
+                    variant="outline"
+                    className="text-sm font-medium peer-checked:bg-primary peer-checked:text-primary-foreground"
                   >
                     {category}
-                  </Label>
-                </div>
+                  </Badge>
+                </label>
               ))}
             </div>
           </div>

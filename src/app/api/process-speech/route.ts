@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     }
 
     // Check API key
-    if (!process.env.GOOGLE_GEMINI_API_KEY) {
+    if (!process.env.GOOGLE_AI_API_KEY) {
       return NextResponse.json(
         { error: "API key is missing" },
         { status: 500 }
@@ -22,16 +22,18 @@ export async function POST(request: Request) {
     }
 
     // Initialize Gemini AI
-    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
+    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-002" });
 
     // Prompt for JSON extraction
+
     const prompt = `
       Convert the following Nepali speech to a structured JSON with these requirements:
       1. Extract a concise product title in English
       2. Create a detailed English description of around 100 words (min 60 words)
       3. List useful tags related to the product (min 5, max 10 tags)
-      4. Identify the exact price in numerical format
+      4. List relevant categories only form (spices, herbs and medicines, food, handcraft, decorative, clothing )
+      5. Identify the exact price in numerical format
       
       Input Nepali Speech: "${nepaliSpeech}"
       
@@ -40,6 +42,7 @@ export async function POST(request: Request) {
         "title": "Product Name",
         "description": "Detailed product description in English",
         "tags": ["tag 1", "tag 2"],
+        "categories" :["category 1", "category 2"],
         "price": 00000
       }
     `;
@@ -48,10 +51,25 @@ export async function POST(request: Request) {
     const MAX_RETRIES = 3;
     let retries = 0;
 
+    let preRres = null;
     while (retries < MAX_RETRIES) {
       try {
         // Generate content
-        const result = await model.generateContent(prompt);
+        console.log("pre parse", preRres);
+        const result = await model.generateContent(
+          preRres
+            ? preRres +
+                `ALWYAS RESPOND ONLY WITH A VALID JSON OBJECT MATCHING THIS STRUCTURE:
+      {
+        "title": "Product Name",
+        "description": "Detailed product description in English",
+        "tags": ["tag 1", "tag 2"],
+        "categories" :["category 1", "category 2"],
+        "price": 00000
+      }`
+            : prompt
+        );
+
         const jsonResponse = result.response.text().trim();
 
         // Remove markdown and extra formatting
@@ -59,6 +77,7 @@ export async function POST(request: Request) {
           .replace(/```(json)?/gi, "")
           .replace(/```/g, "")
           .trim();
+        preRres = cleanJSON;
 
         // Parse and validate JSON
         const parsedResponse = JSON.parse(cleanJSON);
