@@ -37,7 +37,7 @@ export default async function HotDeals() {
               </div>
             </CardContent>
             <CardFooter>
-              <Link href={`/products/${product.id}`} className="w-full">
+              <Link href={`/p/${product.id}`} className="w-full">
                 <Button className="w-full">Add to Cart</Button>
               </Link>
             </CardFooter>
