@@ -19,7 +19,7 @@ const Login = async () => {
     redirect("/login");
   }
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 flex flex-col gap-6">
       <Card className="max-w-md mx-auto">
         <CardHeader>
           <div className="flex items-center space-x-4">
@@ -47,7 +47,7 @@ const Login = async () => {
               {user.ratings.toFixed(1)} / 5
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-4 mt-6">
             <Link href="/add/dashboard">
               <Button>Add</Button>
             </Link>

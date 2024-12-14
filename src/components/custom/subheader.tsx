@@ -13,16 +13,16 @@ import {
   TreesIcon as Tree,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const navigation = [
-  { name: "Food", href: "/food", icon: Utensils },
-  { name: "Hotel", href: "/hotel", icon: Hotel },
-  { name: "Play", href: "/play", icon: Music },
-  { name: "Automove", href: "/automove", icon: Car },
-  { name: "Shop", href: "/shop", icon: ShoppingBag },
-  { name: "Fitness", href: "/fitness", icon: Dumbbell },
-  { name: "Nightlife", href: "/nightlife", icon: Wine },
-  { name: "Park", href: "/park", icon: Tree },
+  { name: "Spices", href: "#", image:"/images/container.png" },
+  { name: "Herbs&Medicines", href: "#", image:"/images/leaves.png"},
+  { name: "Food", href: "#", image:"/images/pickle.png"},
+  { name: "Handcrafts", href: "#", image:"/images/pottery.png"},
+   { name: "Decorative Items", href: "#", image:"/images/anise.png" },
+  { name: "Clothings", href: "#", image:"/images/fashion.png" },
+
 ];
 
 export default function Subheader() {
@@ -39,13 +39,13 @@ export default function Subheader() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-1 rounded-lg w-20 px-3 py-2 text-sm transition-colors",
+                  "flex flex-col items-center justify-center gap-1 rounded-lg w-32 px-3 py-2 text-xs transition-colors",
                   isActive
                     ? "bg-white text-secondary"
                     : "text-white hover:bg-white/10"
                 )}
               >
-                <item.icon className="h-6 w-6" />
+               <Image src={item.image} alt="images" width={400} height={400} className="w-8 h-8"/>
                 <span>{item.name}</span>
               </Link>
             );
