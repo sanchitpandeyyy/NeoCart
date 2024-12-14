@@ -29,7 +29,6 @@ const Summary = () => {
       alert("Please accept the terms and conditions.");
       return;
     }
-    console.log("Form submitted", formData);
   };
 
   return (

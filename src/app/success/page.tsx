@@ -19,7 +19,6 @@ function PaymentSuccessContent() {
 
   useEffect(() => {
     if (method) {
-      console.log(`Payment successful via ${method}`);
     }
   }, [method]);
 

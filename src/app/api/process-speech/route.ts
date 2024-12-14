@@ -12,7 +12,6 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-    console.log("Received Nepali speech:", nepaliSpeech);
 
     // Check API key
     if (!process.env.GOOGLE_GEMINI_API_KEY) {
