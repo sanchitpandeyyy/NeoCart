@@ -21,7 +21,6 @@ export default function KhaltiPayment() {
 
   const { cart, getTotalPrice, getProductName } = useCart();
 
-  // Default values if cart is empty
   const amount = getTotalPrice().toString();
   const productName =
     cart.length > 0

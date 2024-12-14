@@ -130,7 +130,8 @@ export async function POST(req: NextRequest) {
 
       const documents = await cursor.toArray();
       const docContext = JSON.stringify(documents.map((doc) => doc.text));
-
+      console.log("documents");
+      console.log(docContext);
       // Generate response
       const prompt = `
       Context: ${docContext}

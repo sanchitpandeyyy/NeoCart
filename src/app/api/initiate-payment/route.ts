@@ -79,9 +79,9 @@ export async function POST(req: Request) {
           purchase_order_id: transactionId,
           purchase_order_name: productName,
           customer_info: {
-            name: "dai",
-            email: "dai@gmail.com",
-            phone: "9800000000",
+            name: "Sanchit Pandey",
+            email: "info@csitabmc.com",
+            phone: "9841148149",
           },
         };
 

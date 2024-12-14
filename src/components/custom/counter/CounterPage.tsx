@@ -27,11 +27,11 @@ export default function CounterPage() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid sm:grid-cols-2 gap-6">
         <ProductCard
           title="Palpali Dhaka topi"
           subtitle="Symbol of Nepali Braveness"
-          image="images/topi.png"
+          image="/images/topi.png"
           bgColor="bg-secondary"
         />
         <ProductCard
