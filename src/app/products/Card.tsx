@@ -58,34 +58,41 @@ const Card = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 sm:p-6">
       {data.map((val, i) => (
         <div
           key={i}
-          className="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300"
+          className="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300 bg-white flex flex-col h-full"
         >
-          <div className="mb-4 ">
+         
+          <div className="mb-4 relative">
             <Image
               src={val.image}
               alt={val.productname}
               width={400}
               height={400}
-              className="rounded-lg  object-cover aspect-square"
+              className="rounded-lg object-cover w-full h-48"
             />
+            <p className="absolute top-2 left-2 bg-red-500 text-white text-sm font-semibold px-2 py-1 rounded">
+              {val.discount}
+            </p>
           </div>
-          <h3 className="text-lg font-semibold text-gray-800">
-            {val.productname}
-          </h3>
-          <p className="text-red-500 font-medium">{val.discount}</p>
 
-          <p className="text-gray-600 line-through">{val.price}</p>
+  
+          <div className="flex flex-col flex-grow">
+            <h3 className="text-lg font-semibold text-gray-800 truncate">
+              {val.productname}
+            </h3>
+            <p className="text-gray-600 line-through text-sm">{val.price}</p>
+            <p className="text-green-600 font-bold text-lg">{val.priceAfter}</p>
 
-          <p className="text-green-600 font-bold">{val.priceAfter}</p>
+           
+            <div className="flex items-center mt-2">{renderStars(val.stars)}</div>
+          </div>
 
-          <div className="flex items-center mt-2">{renderStars(val.stars)}</div>
-
+     
           <Link href={`/products/${val.slug}`}>
-            <button className="bg-secondary hover:opacity-85 text-white py-2 px-4 rounded mt-4 w-full">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded mt-4 w-full transition-opacity duration-200">
               {val.button}
             </button>
           </Link>

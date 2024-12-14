@@ -6,6 +6,8 @@ import {
   getKindeServerSession,
   LoginLink,
 } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Dialoug } from "./Dialoug";
+
 
 export async function Navbar() {
   const { getUser } = getKindeServerSession();
@@ -32,9 +34,11 @@ export async function Navbar() {
               </Button>
             </Link>
           ) : (
-            <Button className="hidden md:flex">
-              <LoginLink>Sign in</LoginLink>
-            </Button>
+            <div className="hidden md:flex">
+              {/* <LoginLink>Sign in</LoginLink> */}
+              <Dialoug/>
+            
+            </div>
           )}
           <Link href="/products/cart">
             <Button size="icon" variant="ghost" className="relative">
