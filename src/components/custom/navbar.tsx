@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { ShoppingCart, User } from "lucide-react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Dialoug } from "./Dialoug";
+import Image from "next/image";
 
 export async function Navbar() {
   const { getUser } = getKindeServerSession();
@@ -14,8 +15,12 @@ export async function Navbar() {
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-6">
           <Link href="/" className="text-2xl font-bold text-blue-600">
-            <span className="text-red-500">NEO</span>
-            <span className="text-[#2252A1]">CART</span>
+            <Image
+              src="/images/neocart.png"
+              height={60}
+              width={60}
+              alt="hero logo"
+            />
           </Link>
         </div>
         <div className="flex items-center gap-4">
