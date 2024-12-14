@@ -89,8 +89,6 @@ export async function POST(request: Request) {
         ) {
           throw new Error("Invalid JSON structure");
         }
-        console.log("parsedResponse", parsedResponse);
-        // Return successful response
         return NextResponse.json(parsedResponse, { status: 200 });
       } catch (error) {
         console.error(`Retry ${retries + 1} failed:`, error);
