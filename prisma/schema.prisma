@@ -31,6 +31,7 @@ model Product {
   price    Float
   rating   Float    @default(0)
   category String[]
+  tags     String[]
   hotDeals Boolean  @default(false)
 
   User   User?   @relation(fields: [userId], references: [id])
