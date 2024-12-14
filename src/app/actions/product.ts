@@ -3,6 +3,7 @@
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { addToVectorDB } from "./productVector";
+import { Product } from "@/types/products";
 
 export const addProduct = async (data: FormData): Promise<void> => {
   try {
@@ -40,24 +41,28 @@ export const addProduct = async (data: FormData): Promise<void> => {
   redirect(process.env.NEXT_PUBLIC_URL + "/addProduct");
 };
 
-export const getProductById = async (id: string) => {
-  try {
-    const product = await prisma.product.findUnique({
-      where: { id },
-    });
-    return product;
-  } catch (error: any) {
-    console.error("Failed to get product:", error.message, error.stack);
-    throw new Error("Failed to get product");
-  }
-};
-
-export const getProducts = async () => {
+export const getProducts = async (): Promise<Product[]> => {
   try {
     const products = await prisma.product.findMany();
     return products;
   } catch (error: any) {
     console.error("Failed to get products:", error.message, error.stack);
     throw new Error("Failed to get products");
+  }
+};
+
+export const getProductById = async (id: string): Promise<Product | null> => {
+  try {
+    const product = await prisma.product.findUnique({
+      where: { id },
+    });
+    return product;
+  } catch (error: any) {
+    console.error(
+      `Failed to get product with id ${id}:`,
+      error.message,
+      error.stack
+    );
+    throw new Error(`Failed to get product with id ${id}`);
   }
 };
