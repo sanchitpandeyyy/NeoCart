@@ -39,3 +39,15 @@ export const addProduct = async (data: FormData): Promise<void> => {
   }
   redirect(process.env.NEXT_PUBLIC_URL + "/addProduct");
 };
+
+export const getProductById = async (id: string) => {
+  try {
+    const product = await prisma.product.findUnique({
+      where: { id },
+    });
+    return product;
+  } catch (error: any) {
+    console.error("Failed to get product:", error.message, error.stack);
+    throw new Error("Failed to get product");
+  }
+};

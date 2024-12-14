@@ -28,7 +28,7 @@ export default function RootLayout({
     <CartProvider>
       <html lang="en" className={poppins.variable}>
         <body>
-          <NextTopLoader color="red" />
+          <NextTopLoader showSpinner={false} color="red" />
           <Navbar />
           <SubHeader />
           {children}

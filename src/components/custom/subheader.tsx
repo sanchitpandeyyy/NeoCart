@@ -2,27 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Utensils,
-  Hotel,
-  Music,
-  Car,
-  ShoppingBag,
-  Dumbbell,
-  Wine,
-  TreesIcon as Tree,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const navigation = [
-  { name: "Food", href: "/food", icon: Utensils },
-  { name: "Hotel", href: "/hotel", icon: Hotel },
-  { name: "Play", href: "/play", icon: Music },
-  { name: "Automove", href: "/automove", icon: Car },
-  { name: "Shop", href: "/shop", icon: ShoppingBag },
-  { name: "Fitness", href: "/fitness", icon: Dumbbell },
-  { name: "Nightlife", href: "/nightlife", icon: Wine },
-  { name: "Park", href: "/park", icon: Tree },
+  { name: "Spices", href: "/food", icon: "spices.png" },
+  { name: "Herbs", href: "/hotel", icon: "herb.png" },
+  { name: "Food", href: "/play", icon: "food.png" },
+  { name: "Handcrafts", href: "/automove", icon: "handicraft.png" },
+  { name: "Decorative", href: "/shop", icon: "decorative.png" },
+  { name: "Clothings", href: "/fitness", icon: "woven.png" },
 ];
 
 export default function Subheader() {
@@ -31,7 +20,7 @@ export default function Subheader() {
   return (
     <div className="bg-secondary">
       <div className="container h-20">
-        <nav className="flex h-full gap-10 items-center justify-center px-4">
+        <nav className="flex h-full gap-20 items-center justify-center px-4">
           {navigation.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -45,8 +34,14 @@ export default function Subheader() {
                     : "text-white hover:bg-white/10"
                 )}
               >
-                <item.icon className="h-6 w-6" />
-                <span>{item.name}</span>
+                {/* <Image
+                  src={`/images/icon/` + item.icon}
+                  className="h-8 w-8 mb-1"
+                  height={200}
+                  width={200}
+                  alt={item.name}
+                /> */}
+                <span className="text-xs">{item.name}</span>
               </Link>
             );
           })}
