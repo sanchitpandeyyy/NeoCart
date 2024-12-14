@@ -14,8 +14,8 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const paymentMethods = [
-  { name: "eSewa", color: "bg-green-500" },
   { name: "Khalti", color: "bg-purple-900" },
+  { name: "eSewa", color: "bg-green-500" },
   { name: "Stripe", color: "bg-blue-500" },
 ];
 

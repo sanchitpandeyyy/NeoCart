@@ -9,7 +9,6 @@ const steps = [
   { id: 1, label: "Cart Review", btn: "Next" },
   { id: 2, label: "Shipping Information", btn: "Place Order" },
   { id: 3, label: "Payment Method", btn: "Confirm" },
-  { id: 4, label: "Confirmation", btn: "" },
 ];
 
 const Stepper = () => {
@@ -74,11 +73,6 @@ const Stepper = () => {
         {currentStep === 3 && (
           <p className="text-gray-700 ">
             <PaymentMethods />
-          </p>
-        )}
-        {currentStep === 4 && (
-          <p className="text-gray-700">
-            Confirm your order details and complete the payment.
           </p>
         )}
       </div>
