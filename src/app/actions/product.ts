@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { addToVectorDB } from "./productVector";
 
 export const addProduct = async (data: FormData): Promise<void> => {
   try {
@@ -27,10 +27,27 @@ export const addProduct = async (data: FormData): Promise<void> => {
         hotDeals,
       },
     });
-
-    redirect(process.env.NEXT_PUBLIC_URL + "/addProduct");
+    console.log("Product created:", newProduct);
+    addToVectorDB({
+      name: newProduct.name,
+      description: newProduct.desc,
+      tags: newProduct.category,
+    });
   } catch (error: any) {
     console.error("Failed to create product:", error.message, error.stack);
     throw new Error("Failed to create product");
+  }
+  redirect(process.env.NEXT_PUBLIC_URL + "/addProduct");
+};
+
+export const getProductById = async (id: string) => {
+  try {
+    const product = await prisma.product.findUnique({
+      where: { id },
+    });
+    return product;
+  } catch (error: any) {
+    console.error("Failed to get product:", error.message, error.stack);
+    throw new Error("Failed to get product");
   }
 };

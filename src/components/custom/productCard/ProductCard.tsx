@@ -6,9 +6,9 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { Skeleton } from "../ui/skeleton";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
+import { Skeleton } from "../../ui/skeleton";
+import { Badge } from "../../ui/badge";
+import { Button } from "../../ui/button";
 import { addProduct } from "@/app/actions/product";
 
 interface ProductData {
@@ -58,7 +58,10 @@ export const ProductCard = ({ data }: { data: ProductData }) => {
           <p className="mb-4 text-sm md:text-base">{data.description}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {data.tags.map((tag) => (
-              <Badge key={tag} className="bg-gray-200 text-black text-xs md:text-sm">
+              <Badge
+                key={tag}
+                className="bg-gray-200 text-black text-xs md:text-sm"
+              >
                 {tag}
               </Badge>
             ))}
