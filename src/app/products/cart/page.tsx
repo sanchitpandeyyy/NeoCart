@@ -9,8 +9,8 @@ const CartPage = () => {
   const router = useRouter();
 
   const handleCheckout = () => {
-    alert("Proceeding to checkout..."); //
-    router.push("/checkout");
+    alert("Proceeding to checkout...");
+    router.push("/products/checkout");
   };
 
   const handleIncreaseQuantity = (id: string) => {
