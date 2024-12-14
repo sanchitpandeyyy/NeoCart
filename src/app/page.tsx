@@ -8,7 +8,6 @@ const Home = () => {
     <div className="mt-2 container">
       <HeroLander />
       <HotDeals />
-      <p className="pl-4 text-2xl font-semibold">Hot Deals</p>
       <Card />
     </div>
   );
