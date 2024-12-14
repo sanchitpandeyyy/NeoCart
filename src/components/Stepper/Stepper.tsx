@@ -58,28 +58,26 @@ const Stepper = () => {
         ))}
       </div>
 
-      {/* Step Content */}
       <div className="border p-6 rounded-lg shadow-md bg-white">
         {currentStep === 1 && (
-          <p className="text-gray-700 flex gap-8 flex-col h-fit ">
+          <div className="text-gray-700 flex gap-8 flex-col h-fit ">
             Review the items in your cart before proceeding to checkout.
             <CartReview />
-          </p>
+          </div>
         )}
         {currentStep === 2 && (
-          <p className="text-gray-700 flex gap-8 flex-col h-fit ">
+          <div className="text-gray-700 flex gap-8 flex-col h-fit ">
             Provide your shipping address to calculate delivery options.
             <Summary />
-          </p>
+          </div>
         )}
         {currentStep === 3 && (
-          <p className="text-gray-700 ">
+          <div className="text-gray-700 ">
             <PaymentMethods totalPrice={totalPrice} />
-          </p>
+          </div>
         )}
       </div>
 
-      {/* Navigation Buttons */}
       <div className="flex justify-between mt-6">
         <button
           className={`px-4 py-2 rounded-md text-white ${
