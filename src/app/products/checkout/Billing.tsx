@@ -69,7 +69,7 @@ const Summary = () => {
           Phone Number
         </label>
         <input
-          type="text"
+          type="number"
           id="phone"
           name="phone"
           className="w-full p-2 border border-gray-300 rounded-md"
@@ -111,13 +111,12 @@ const Summary = () => {
           Zip Code
         </label>
         <input
-          type="text"
+          type="number"
           id="zipCode"
           name="zipCode"
           className="w-full p-2 border border-gray-300 rounded-md"
           value={formData.zipCode}
           onChange={handleChange}
-          required
         />
       </div>
       <div className="col-span-2">

@@ -21,6 +21,7 @@ import Review from "@/components/custom/Review";
 import { useCart } from "@/app/products/cart/CartContext";
 import Image from "next/image";
 import { CreditCard, ShoppingCart } from "lucide-react";
+import { MarketplaceLoader } from "../loader";
 
 const ProductDetails = () => {
   const params = useParams<{ id: string }>();
@@ -53,7 +54,11 @@ const ProductDetails = () => {
   }, [productId]);
 
   if (isLoading) {
-    return <div>Loading product details...</div>;
+    return (
+      <div>
+        <MarketplaceLoader />
+      </div>
+    );
   }
 
   if (error) {
@@ -147,10 +152,14 @@ const ProductDetails = () => {
             <DrawerFooter className="border-t pt-4">
               <div className="flex justify-end gap-4 w-full">
                 <Button
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 ease-in-out"
-                  onClick={() => setOpenDrawer(false)}
+                  className="text-white"
+                  onClick={() => {
+                    addToCart(product.id, product.name, product.price * count);
+                    setOpenDrawer(false);
+                    router.push("/products/checkout");
+                  }}
                 >
-                  Proceed to Checkout
+                  Submit
                 </Button>
                 <DrawerClose asChild>
                   <Button
