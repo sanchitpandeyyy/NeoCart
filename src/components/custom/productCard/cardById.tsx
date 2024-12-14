@@ -23,6 +23,7 @@ interface ProductCardsProps {
 }
 
 const ProductCards: React.FC<ProductCardsProps> = ({ data }) => {
+  console.log(data);
   const res = data.map((item) => {
     return products.find((product) => product.id === item.id.toString());
   });
