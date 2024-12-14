@@ -1,4 +1,5 @@
 "use client";
+import PaymentMethods from "@/components/payment-method";
 
 import Summary from "@/app/products/checkout/Billing";
 import CartReview from "@/app/products/checkout/CartReview";
@@ -71,8 +72,8 @@ const Stepper = () => {
           </p>
         )}
         {currentStep === 3 && (
-          <p className="text-gray-700">
-            Choose your payment method to complete the purchase.
+          <p className="text-gray-700 ">
+            <PaymentMethods />
           </p>
         )}
         {currentStep === 4 && (

@@ -8,11 +8,11 @@ import { Navbar } from "../components/custom/navbar";
 import { Poppins } from "next/font/google";
 import Footer from "@/components/custom/footer";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
-});
+// const poppins = Poppins({
+//   subsets: ["latin"],
+//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+//   variable: "--font-poppins",
+// });
 
 export const metadata: Metadata = {
   title: "NeoCart",
@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <CartProvider>
-      <html lang="en" className={poppins.variable}>
+      <html lang="en">
         <body>
           <NextTopLoader color="red" />
           <Navbar />
