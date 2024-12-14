@@ -107,8 +107,8 @@ export default function NepaliSpeechToProductConverter() {
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-center">
-                <span className="text-red-700">Smart NEO</span>
-                <span className="text-blue-800">CART Assistance</span>
+                <span className="text-red-700">NEO </span>
+                <span className="text-blue-800">AI</span>
                 <p className="text-sm font-medium text-gray-700">
                   Add your product
                 </p>
