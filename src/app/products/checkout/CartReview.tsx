@@ -18,7 +18,7 @@ const CartReview = () => {
               {cart.map((item) => (
                 <li
                   key={item.id}
-                  className="flex items-center justify-between p-4 border rounded-md shadow-sm"
+                  className="flex items-center justify-between p-4 border rounded-md shadow-sm w-64"
                 >
                   <div className="flex items-center gap-4">
                     {item.image && (
